@@ -1,15 +1,11 @@
-import styled from '@emotion/styled';
-
-const Heading = styled.h1`
-  color: red;
-`
+import Layout from '../components/layout/layout'
 
 export default function Home() {
   return (
     <div>
-
-      <Heading>Inicio</Heading>
-
+      <Layout>
+        <h1>Inicio</h1>
+      </Layout>
     </div>
   )
 }
