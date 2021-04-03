@@ -8,14 +8,14 @@ const useValidacion = (stateInicial, validar, fn) => {
 
     useEffect(() => {
         if(submitForm){
-            const noErrores = Object.key(errores).length === 0;
+            const noErrores = Object.keys(errores).length === 0;
 
             if(noErrores) {
                 fn(); // Fn = función que se ejecuta en el componente
             }
             guardarSubmitForm(false);
         }
-    },[])
+    },[errores])
 
 
     // función que se ejecuta conforme el usuario escribe algo
@@ -28,7 +28,7 @@ const useValidacion = (stateInicial, validar, fn) => {
 
     // función que se ejecuta cuando el usuario hace submit
     const handleSubmit = e => {
-        e.preventDevault();
+        e.preventDefault();
         const erroresValidacion = validar(valores);
         guardarErrores(erroresValidacion);
         guardarSubmitForm(true);
