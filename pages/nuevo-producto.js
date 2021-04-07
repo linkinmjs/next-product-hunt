@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { css } from '@emotion/react';
-import Router from 'next/router';
+import Router, {useRouter} from 'next/router';
 import Layout from '../components/layout/Layout';
 import { Formulario, Campo, InputSubmit, Error } from '../components/ui/Formulario';
 
-import firebase from '../firebase';
+import { FirebaseContext } from '../firebase';
 
 // validaciones
 import useValidacion from '../hooks/useValidacion';
@@ -26,8 +26,32 @@ const NuevoProducto = () => {
 
   const { nombre, empresa, imagen, url, descripcion } = valores;
 
+  // hook de routing para redireccionar
+  const router = useRouter();
+
+  // context con las operaciones crud de firebase
+  const { usuario, firebase } = useContext( FirebaseContext );
+
   async function crearProducto() {
 
+    // si el usuario no está autenticado, llevar al login
+    if( !usuario ) {
+      return router.push('/login');
+    }
+
+    // crear el objeto de nuevo producto
+    const producto = {
+      nombre,
+      empresa,
+      url,
+      descripcion,
+      votos: 0,
+      comentarios: [],
+      creado: Date.now()
+    }
+
+    // insertarlo en la base de datos
+    firebase.db.collection('productos').add(producto);
   }
 
   return (
@@ -96,7 +120,7 @@ const NuevoProducto = () => {
                 <input
                   type="url"
                   id="url"
-                  placeholder="Ingrese la URL del producto"
+                  placeholder="Ej: https://www.producto.com"
                   name="url"
                   value={url}
                   onChange={handleChange}
