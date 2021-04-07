@@ -8,12 +8,12 @@ import firebase from '../firebase';
 
 // validaciones
 import useValidacion from '../hooks/useValidacion';
-import validarCrearCuenta from '../validacion/validarCrearCuenta';
+import validarCrearProducto from '../validacion/validarCrearProducto';
 
 const STATE_INICIAL = {
   nombre: '',
   empresa: '',
-  imagen: '',
+  // imagen: '',
   url: '',
   descripcion: ''
 }
@@ -22,11 +22,11 @@ const NuevoProducto = () => {
 
   const [error, guardarError] = useState(false);
 
-  const { valores, errores, handleSubmit, handleChange, handleBlur } = useValidacion(STATE_INICIAL, validarCrearCuenta, crearCuenta);
+  const { valores, errores, handleSubmit, handleChange, handleBlur } = useValidacion(STATE_INICIAL, validarCrearProducto, crearProducto);
 
   const { nombre, empresa, imagen, url, descripcion } = valores;
 
-  async function crearCuenta() {
+  async function crearProducto() {
 
   }
 
@@ -77,7 +77,7 @@ const NuevoProducto = () => {
 
               {errores.empresa && <Error>{errores.empresa}</Error>}
 
-              <Campo>
+              {/* <Campo>
                 <label htmlFor="imagen">Imagen</label>
                 <input
                   type="file"
@@ -89,14 +89,14 @@ const NuevoProducto = () => {
                 />
               </Campo>
 
-              {errores.imagen && <Error>{errores.imagen}</Error>}
+              {errores.imagen && <Error>{errores.imagen}</Error>} */}
 
               <Campo>
                 <label htmlFor="url">URL</label>
                 <input
                   type="url"
                   id="url"
-                  placeholder="Tu url"
+                  placeholder="Ingrese la URL del producto"
                   name="url"
                   value={url}
                   onChange={handleChange}
