@@ -32,7 +32,7 @@ const Producto = () => {
     //console.log(id);
 
     // context de firebase
-    const { firebase } = useContext(FirebaseContext);
+    const { firebase, usuario } = useContext(FirebaseContext);
 
     useEffect(() => {
         if (id) {
@@ -73,19 +73,23 @@ const Producto = () => {
 
                         <p>{descripcion}</p>
 
-                        <h2>Agrega tu comentario</h2>
-                        <form>
-                            <Campo>
-                                <input
-                                    type="text"
-                                    name="mensaje"
-                                />
-                            </Campo>
-                            <InputSubmit
-                                type="submit"
-                                value="Agregar comentario"
-                            />
-                        </form>
+                        {usuario && (
+                            <>
+                                <h2>Agrega tu comentario</h2>
+                                <form>
+                                    <Campo>
+                                        <input
+                                            type="text"
+                                            name="mensaje"
+                                        />
+                                    </Campo>
+                                    <InputSubmit
+                                        type="submit"
+                                        value="Agregar comentario"
+                                    />
+                                </form>
+                            </>
+                        )}
 
                         <h2 css={css`
                             margin: 2rem 0;
@@ -115,7 +119,9 @@ const Producto = () => {
                             `}>{votos} Votos</p>
                         </div>
 
-                        <Boton>Votar</Boton>
+                        {usuario && (
+                            <Boton>Votar</Boton>
+                        )}
                     </aside>
                 </ContenedorProducto>
             </div>
