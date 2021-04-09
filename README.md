@@ -8,7 +8,7 @@ Proyecto didáctico hecho en React.
 
 ## Descripción
 
-Proyecto NEXT Serverless con Firebase en React. Se utilizó Emotion para los estilos y también se añadió Normalize.
+Proyecto React utilizando Next.js Serverless con Firebase. Se utilizó Emotion para los estilos y también se añadió Normalize.
 Se podrá visualizar el ejemplo en producción en [link](https://hardcore-banach-b1ffc1.netlify.app)
 
 ### Tecnologías
