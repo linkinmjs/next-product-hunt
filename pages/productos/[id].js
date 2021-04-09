@@ -51,7 +51,7 @@ const Producto = () => {
 
     if (Object.keys(producto).length === 0) return 'Cargando...';
 
-    const { comentarios, creado, descripcion, empresa, nombre, url, urlimagen, votos } = producto;
+    const { comentarios, creado, descripcion, empresa, nombre, url, urlimagen, votos, creador } = producto;
 
     return (
         <Layout>
@@ -68,7 +68,7 @@ const Producto = () => {
                 <ContenedorProducto>
                     <div>
                         <p>Publicado hace: {formatDistanceToNow(new Date(creado), { locale: es })}</p>
-
+                        <p>Por {creador.nombre} de {empresa}</p>
                         <img src={urlimagen} />
 
                         <p>{descripcion}</p>
