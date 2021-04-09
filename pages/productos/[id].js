@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Error404 from '../../components/layout/404';
 import Layout from '../../components/layout/Layout';
-import {Campo, InputSubmit} from '../../components/ui/Formulario';
+import { Campo, InputSubmit } from '../../components/ui/Formulario';
+import Boton from '../../components/ui/Boton';
 
 import { useRouter } from 'next/router';
 import { FirebaseContext } from '../../firebase';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { es } from 'date-fns/locale';
 
-import {css} from '@emotion/react';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 const ContenedorProducto = styled.div`
@@ -48,13 +49,13 @@ const Producto = () => {
         }
     }, [id]);
 
-    if(Object.keys(producto).length === 0) return 'Cargando...';
+    if (Object.keys(producto).length === 0) return 'Cargando...';
 
     const { comentarios, creado, descripcion, empresa, nombre, url, urlimagen, votos } = producto;
 
     return (
         <Layout>
-            
+
             {error && <Error404 />}
 
             <div className="contenedor">
@@ -75,7 +76,7 @@ const Producto = () => {
                         <h2>Agrega tu comentario</h2>
                         <form>
                             <Campo>
-                                <input 
+                                <input
                                     type="text"
                                     name="mensaje"
                                 />
@@ -94,11 +95,27 @@ const Producto = () => {
                                 <p>{comentario.nombre}</p>
                                 <p>Escrito por: {comentario.usuarioNombre}</p>
                             </li>
-                        ) )}
+                        ))}
                     </div>
 
                     <aside>
-                        2
+                        <Boton
+                            target="_blank"
+                            bgColor="true"
+                            href={url}
+                        >Visitar URL</Boton>
+
+                        <div
+                            css={css`
+                                margin-top: 5rem;
+                            `}
+                        >
+                            <p css={css`
+                                text-align:center;
+                            `}>{votos} Votos</p>
+                        </div>
+
+                        <Boton>Votar</Boton>
                     </aside>
                 </ContenedorProducto>
             </div>
